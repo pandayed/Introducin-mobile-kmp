@@ -1,4 +1,5 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -23,14 +24,19 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Star
 
 @Composable
 fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
     val posts by viewModel.posts.collectAsState()
 
     LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Gray),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp) // <-- this is like gap
     ) {
         items(posts) { post ->
             PostItem(
@@ -47,6 +53,7 @@ fun PostItem(authorName: String, authorHandle: String, content: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .background(color = Color.White)
             .padding(16.dp)
     ) {
         Row(
@@ -74,12 +81,11 @@ fun PostItem(authorName: String, authorHandle: String, content: String) {
                     color = Color.Gray
                 )
             }
-            IconButton(onClick = { /* No functionality */ }) {
-                Icon(
-                    imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "Menu"
-                )
-            }
+            Text(
+                text = "2h ago", // Replace with dynamic timestamp if available
+                fontSize = 12.sp,
+                color = Color.Gray
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
@@ -109,6 +115,27 @@ fun PostItem(authorName: String, authorHandle: String, content: String) {
                 Icon(
                     imageVector = Icons.Filled.Share,
                     contentDescription = "Share",
+                    tint = Color.Gray
+                )
+            }
+            IconButton(onClick = { /* No functionality */ }) {
+                Icon(
+                    imageVector = Icons.Filled.Email,
+                    contentDescription = "Report",
+                    tint = Color.Gray
+                )
+            }
+            IconButton(onClick = { /* No functionality */ }) {
+                Icon(
+                    imageVector = Icons.Filled.Refresh,
+                    contentDescription = "Reshare",
+                    tint = Color.Gray
+                )
+            }
+            IconButton(onClick = { /* No functionality */ }) {
+                Icon(
+                    imageVector = Icons.Filled.Star,
+                    contentDescription = "Save",
                     tint = Color.Gray
                 )
             }
