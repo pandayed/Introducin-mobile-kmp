@@ -2,15 +2,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
+import kotlinx.coroutines.flow.collect
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.mp.KoinPlatform.getKoin
-
 
 @Composable
 fun FeedScreen() {
@@ -19,7 +17,7 @@ fun FeedScreen() {
 
     // State to hold posts
     val posts = produceState(initialValue = emptyList<Post>()) {
-        value = getPostsUseCase.execute()
+        getPostsUseCase.execute().collect { value = it }
     }
 
     // UI to display posts
@@ -34,6 +32,7 @@ fun FeedScreen() {
         }
     }
 }
+
 @Preview
 @Composable
 fun PreviewFeedScreen() {

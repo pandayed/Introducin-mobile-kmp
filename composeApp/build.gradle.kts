@@ -42,6 +42,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             // Koin Core for KMP
             implementation("io.insert-koin:koin-core:3.5.3")
+
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
         }
 
         // Android Main Dependencies
