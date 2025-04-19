@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Person
 
 @Composable
 fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
@@ -35,7 +36,6 @@ fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
 
         posts.forEach { post ->
             PostItem(
-                profileImage = painterResource(id = post.profileImageRes),
                 authorName = post.authorName,
                 authorHandle = post.authorHandle,
                 content = post.content
@@ -45,7 +45,7 @@ fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
 }
 
 @Composable
-fun PostItem(profileImage: Painter, authorName: String, authorHandle: String, content: String) {
+fun PostItem(authorName: String, authorHandle: String, content: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,13 +55,14 @@ fun PostItem(profileImage: Painter, authorName: String, authorHandle: String, co
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Image(
-                painter = profileImage,
-                contentDescription = "Profile Picture",
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = "Profile Placeholder",
                 modifier = Modifier
                     .size(40.dp)
                     .padding(end = 8.dp)
-                    .clip(CircleShape)
+                    .clip(CircleShape),
+                tint = Color.Gray
             )
             Column(modifier = Modifier.weight(1f)) {
                 Text(
