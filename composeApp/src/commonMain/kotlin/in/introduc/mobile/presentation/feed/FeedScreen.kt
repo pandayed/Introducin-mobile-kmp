@@ -15,6 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Share
 
 @Composable
 fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
@@ -72,7 +77,7 @@ fun PostItem(profileImage: Painter, authorName: String, authorHandle: String, co
             }
             IconButton(onClick = { /* No functionality */ }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_more_vert),
+                    imageVector = Icons.Filled.MoreVert,
                     contentDescription = "Menu"
                 )
             }
@@ -89,21 +94,21 @@ fun PostItem(profileImage: Painter, authorName: String, authorHandle: String, co
         ) {
             IconButton(onClick = { /* No functionality */ }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_like),
+                    imageVector = Icons.Filled.Favorite,
                     contentDescription = "Like",
                     tint = Color.Gray
                 )
             }
             IconButton(onClick = { /* No functionality */ }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_comment),
+                    imageVector = Icons.Filled.Email,
                     contentDescription = "Comment",
                     tint = Color.Gray
                 )
             }
             IconButton(onClick = { /* No functionality */ }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_share),
+                    imageVector = Icons.Filled.Share,
                     contentDescription = "Share",
                     tint = Color.Gray
                 )

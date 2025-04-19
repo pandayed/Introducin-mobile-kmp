@@ -105,4 +105,6 @@ android {
 dependencies {
     implementation(libs.androidx.material3.android)
     debugImplementation(compose.uiTooling)
+    implementation("androidx.compose.material:material-icons-core:1.7.6")
+    implementation("androidx.compose.material:material-icons-extended:1.7.6")
 }
