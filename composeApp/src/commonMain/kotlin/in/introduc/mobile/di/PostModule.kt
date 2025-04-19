@@ -6,9 +6,7 @@ import org.koin.dsl.module
 
 val postModule = module {
 
-    // Provide repository
     single<IPostRepository> { PostRepository() }
-
-    // Provide use case
     single { GetPostsUseCase(get()) }
+    viewModel { FeedViewModel(get()) }
 }

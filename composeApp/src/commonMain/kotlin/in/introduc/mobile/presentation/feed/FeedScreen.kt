@@ -3,38 +3,32 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import kotlinx.coroutines.flow.collect
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.mp.KoinPlatform.getKoin
+
+
+import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 
 @Composable
-fun FeedScreen() {
-    // Retrieve the GetPostsUseCase from Koin
-    val getPostsUseCase: GetPostsUseCase = getKoin().get()
+fun FeedScreen(viewModel: FeedViewModel = koinViewModel()) {
 
-    // State to hold posts
-    val posts = produceState(initialValue = emptyList<Post>()) {
-        getPostsUseCase.execute().collect { value = it }
-    }
+    val posts by viewModel.posts.collectAsState()
 
-    // UI to display posts
-    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = { /* Trigger action to update posts */ }) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { /* handle post refresh if needed */ }) {
             Text("Load Posts")
         }
 
-        // Display the posts
-        posts.value.forEach { post ->
-            Text(text = post.content) // Assuming Post has a 'content' property
+        posts.forEach { post ->
+            Text(text = post.content)
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewFeedScreen() {
-    FeedScreen() // Preview FeedScreen with mock data
 }
