@@ -27,6 +27,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
 
 
 @Composable
@@ -39,35 +43,56 @@ fun App() {
     }
 
     var currentRoute by remember { mutableStateOf(Screen.Feed.route) }
+    var showProfileScreen by remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier.padding(top = 24.dp), // Add padding for the status bar
         topBar = {
             TopAppBar(
-                title = { Text("App Title") },
+                title = { Text(if (showProfileScreen) "Profile" else "App Title") },
+                navigationIcon = if (showProfileScreen) {
+                    {
+                        IconButton(onClick = { showProfileScreen = false }) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = "Back Icon",
+                                tint = Color.White
+                            )
+                        }
+                    }
+                } else null,
                 actions = {
-                    IconButton(onClick = { /* Handle profile icon click */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "Profile Icon",
-                            tint = Color.White
-                        )
+                    if (!showProfileScreen) {
+                        IconButton(onClick = { showProfileScreen = true }) {
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "Profile Icon",
+                                tint = Color.White
+                            )
+                        }
                     }
                 }
             )
         },
         bottomBar = {
-            BottomNavBar(
-                currentRoute = currentRoute,
-                onItemSelected = { screen -> currentRoute = screen.route }
-            )
+            if (!showProfileScreen) {
+                BottomNavBar(
+                    currentRoute = currentRoute,
+                    onItemSelected = { screen -> currentRoute = screen.route }
+                )
+            }
         }
     ) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            when (currentRoute) {
-                Screen.Feed.route -> FeedScreen()
-                Screen.Trending.route -> Text("Trending Screen") // Replace with actual composable
-                Screen.Notifications.route -> Text("Notifications Screen") // Replace with actual composable
+            if (showProfileScreen) {
+                ProfileScreen()
+            } else {
+                when (currentRoute) {
+                    Screen.Feed.route -> FeedScreen()
+                    Screen.Trending.route -> Text("Trending Screen") // Replace with actual composable
+                    Screen.Notifications.route -> Text("Notifications Screen") // Replace with actual composable
+                }
             }
         }
     }
