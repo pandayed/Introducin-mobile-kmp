@@ -30,10 +30,6 @@ fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(onClick = { /* handle post refresh if needed */ }) {
-            Text("Load Posts")
-        }
-
         posts.forEach { post ->
             PostItem(
                 authorName = post.authorName,
