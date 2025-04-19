@@ -44,7 +44,6 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.koin.androidx.viewmodel)
         }
 
         // Android Main Dependencies
@@ -54,7 +53,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.compose) // Add this
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.koin.androidx.viewmodel)
         }
 
         // Create iOS Main source set
