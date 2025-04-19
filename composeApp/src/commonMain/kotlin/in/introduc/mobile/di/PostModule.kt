@@ -8,5 +8,5 @@ val postModule = module {
 
     single<IPostRepository> { PostRepository() }
     single { GetPostsUseCase(get()) }
-    viewModel { FeedViewModel(get()) }
+    single { FeedViewModel(get()) }
 }

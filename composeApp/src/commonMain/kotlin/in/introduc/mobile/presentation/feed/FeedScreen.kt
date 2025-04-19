@@ -7,15 +7,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
-import androidx.compose.runtime.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import org.koin.compose.koinInject
 
 @Composable
-fun FeedScreen(viewModel: FeedViewModel = koinViewModel()) {
+fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
 
     val posts by viewModel.posts.collectAsState()
 
