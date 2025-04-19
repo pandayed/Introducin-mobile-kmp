@@ -21,16 +21,18 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 
 @Composable
 fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
     val posts by viewModel.posts.collectAsState()
 
-    Column(
+    LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        posts.forEach { post ->
+        items(posts) { post ->
             PostItem(
                 authorName = post.authorName,
                 authorHandle = post.authorHandle,
