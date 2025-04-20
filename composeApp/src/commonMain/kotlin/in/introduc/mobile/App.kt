@@ -41,7 +41,6 @@ fun App() {
 
     var currentRoute by remember { mutableStateOf(Screen.Feed.route) }
     var showProfileScreen by remember { mutableStateOf(false) }
-    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier.padding(top = 24.dp), // Add padding for the status bar
