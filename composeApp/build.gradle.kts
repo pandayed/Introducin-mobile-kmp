@@ -40,18 +40,20 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            // Koin Core for KMP
-            implementation("io.insert-koin:koin-core:3.5.3")
-
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.koin.core)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.koin.androidx.compose)
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
         }
 
         // Android Main Dependencies
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            // Koin for Android
-            implementation("io.insert-koin:koin-android:3.5.3")
+            implementation(libs.androidx.lifecycle.viewmodel.compose) // Add this
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
 
         // Create iOS Main source set
@@ -68,7 +70,7 @@ kotlin {
 
             dependencies {
                 // Koin for iOS
-                implementation("io.insert-koin:koin-core:3.5.3")
+                implementation(libs.koin.core)
             }
         }
     }
@@ -104,4 +106,6 @@ android {
 dependencies {
     implementation(libs.androidx.material3.android)
     debugImplementation(compose.uiTooling)
+    implementation("androidx.compose.material:material-icons-core:1.7.6")
+    implementation("androidx.compose.material:material-icons-extended:1.7.6")
 }
