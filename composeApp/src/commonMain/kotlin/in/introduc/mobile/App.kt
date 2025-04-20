@@ -34,6 +34,13 @@ import androidx.navigation.compose.composable
 import `in`.introduc.mobile.presentation.screens.home.HomeScreen
 
 
+sealed class AppScreen(val route: String) {
+    object Home : AppScreen("home")
+    object Account : AppScreen("account")
+    object Profile : AppScreen("profile")
+    object SignIn : AppScreen("signin")
+}
+
 @Composable
 @Preview
 fun App() {
@@ -48,11 +55,11 @@ fun App() {
     Scaffold(
         modifier = Modifier.padding(top = 24.dp), // Add padding for the status bar
     ) {
-        NavHost(navController = navController, startDestination = "home") {
-            composable("home") { HomeScreen() } // Replace with actual HomeScreen composable
-            composable("account") { Text("Account Screen") } // Replace with actual AccountScreen composable
-            composable("profile") { Text("Profile Screen") } // Replace with actual ProfileScreen composable
-            composable("signin") { Text("SignIn Screen") } // Replace with actual SignInScreen composable
+        NavHost(navController = navController, startDestination = AppScreen.Home.route) {
+            composable(AppScreen.Home.route) { HomeScreen() }
+            composable(AppScreen.Account.route) { Text("Account Screen") }
+            composable(AppScreen.Profile.route) { Text("Profile Screen") }
+            composable(AppScreen.SignIn.route) { Text("SignIn Screen") }
         }
     }
 }
