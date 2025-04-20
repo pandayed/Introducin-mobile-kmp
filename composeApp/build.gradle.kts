@@ -44,6 +44,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.koin.androidx.compose)
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
         }
 
         // Android Main Dependencies
