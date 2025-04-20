@@ -4,6 +4,7 @@ import FeedScreen
 import MessagesScreen
 import NotificationsScreen
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -23,8 +24,8 @@ fun HomeScreen() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { HomeBottomNavBar(navController) }
-    ) {
-        HomeNavigationHost(navController)
+    ) { paddingValues -> // Pass paddingValues from Scaffold
+        HomeNavigationHost(navController, paddingValues)
     }
 }
 
@@ -50,9 +51,9 @@ fun HomeBottomNavBar(navController: NavHostController) {
 }
 
 @Composable
-fun HomeNavigationHost(navController: NavHostController) {
+fun HomeNavigationHost(navController: NavHostController, paddingValues: PaddingValues) {
     NavHost(navController, startDestination = "feed") {
-        composable("feed") { FeedScreen() }
+        composable("feed") { FeedScreen(paddingValues = paddingValues) } // Pass paddingValues to FeedScreen
         composable("messages") { MessagesScreen() }
         composable("notifications") { NotificationsScreen() }
     }

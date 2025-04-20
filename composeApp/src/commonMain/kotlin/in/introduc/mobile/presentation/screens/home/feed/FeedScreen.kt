@@ -28,13 +28,14 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Star
 
 @Composable
-fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
+fun FeedScreen(viewModel: FeedViewModel = koinInject(), paddingValues: PaddingValues) {
     val posts by viewModel.posts.collectAsState()
 
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color.Gray),
+            .background(color = Color.Gray)
+            .padding(paddingValues), // Apply paddingValues to respect bottom bar
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(1.dp) // <-- this is like gap
     ) {
