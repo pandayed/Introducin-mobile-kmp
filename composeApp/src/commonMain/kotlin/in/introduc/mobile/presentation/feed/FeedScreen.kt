@@ -36,7 +36,7 @@ fun FeedScreen(viewModel: FeedViewModel = koinInject()) {
             .fillMaxWidth()
             .background(color = Color.Gray),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp) // <-- this is like gap
+        verticalArrangement = Arrangement.spacedBy(1.dp) // <-- this is like gap
     ) {
         items(posts) { post ->
             PostItem(
@@ -54,7 +54,8 @@ fun PostItem(authorName: String, authorHandle: String, content: String) {
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.White)
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -87,7 +88,6 @@ fun PostItem(authorName: String, authorHandle: String, content: String) {
                 color = Color.Gray
             )
         }
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = content,
             fontSize = 14.sp,

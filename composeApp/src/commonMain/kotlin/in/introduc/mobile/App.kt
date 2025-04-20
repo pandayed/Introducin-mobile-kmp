@@ -47,7 +47,7 @@ fun App() {
         modifier = Modifier.padding(top = 24.dp), // Add padding for the status bar
         topBar = {
             TopAppBar(
-                title = { Text(if (showProfileScreen) "Profile" else "App Title") },
+                title = { Text(if (showProfileScreen) "Profile" else "Introduc.in") },
                 navigationIcon = if (showProfileScreen) {
                     {
                         IconButton(onClick = { showProfileScreen = false }) {
