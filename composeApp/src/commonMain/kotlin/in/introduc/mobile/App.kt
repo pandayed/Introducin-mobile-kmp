@@ -28,6 +28,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.composable
+import `in`.introduc.mobile.presentation.screens.home.HomeScreen
 
 
 @Composable
@@ -39,57 +43,16 @@ fun App() {
         modules(postModule)
     }
 
-    var currentRoute by remember { mutableStateOf(Screen.Feed.route) }
-    var showProfileScreen by remember { mutableStateOf(false) }
+    val navController = rememberNavController()
 
     Scaffold(
         modifier = Modifier.padding(top = 24.dp), // Add padding for the status bar
-        topBar = {
-            TopAppBar(
-                title = { Text(if (showProfileScreen) "Profile" else "Introduc.in") },
-                navigationIcon = if (showProfileScreen) {
-                    {
-                        IconButton(onClick = { showProfileScreen = false }) {
-                            Icon(
-                                imageVector = Icons.Filled.ArrowBack,
-                                contentDescription = "Back Icon",
-                                tint = Color.White
-                            )
-                        }
-                    }
-                } else null,
-                actions = {
-                    if (!showProfileScreen) {
-                        IconButton(onClick = { showProfileScreen = true }) {
-                            Icon(
-                                imageVector = Icons.Filled.Person,
-                                contentDescription = "Profile Icon",
-                                tint = Color.White
-                            )
-                        }
-                    }
-                },
-            )
-        },
-        bottomBar = {
-            if (!showProfileScreen) {
-                BottomNavBar(
-                    currentRoute = currentRoute,
-                    onItemSelected = { screen -> currentRoute = screen.route }
-                )
-            }
-        }
     ) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            if (showProfileScreen) {
-                ProfileScreen()
-            } else {
-                when (currentRoute) {
-                    Screen.Feed.route -> FeedScreen()
-                    Screen.Trending.route -> Text("Trending Screen") // Replace with actual composable
-                    Screen.Notifications.route -> Text("Notifications Screen") // Replace with actual composable
-                }
-            }
+        NavHost(navController = navController, startDestination = "home") {
+            composable("home") { HomeScreen() } // Replace with actual HomeScreen composable
+            composable("account") { Text("Account Screen") } // Replace with actual AccountScreen composable
+            composable("profile") { Text("Profile Screen") } // Replace with actual ProfileScreen composable
+            composable("signin") { Text("SignIn Screen") } // Replace with actual SignInScreen composable
         }
     }
 }
